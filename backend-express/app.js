@@ -32,18 +32,19 @@ db.connect();
 
 // Routes and passing the db connection
 const usersRouter = require("./routes/users");
-const providersRouter = require("./routes/providers");
-const requestsRouter = require("./routes/requests");
-const generalRouter = require("./routes/general");
-
-app.use("/api/providers", providersRouter(db));
-
 app.use("/api/users", usersRouter(db));
 
+const providersRouter = require("./routes/providers");
+app.use("/api/providers", providersRouter(db));
+
 // User requests routes and offers for all requests made by user
+const requestsRouter = require("./routes/requests");
 app.use("/api/clients", requestsRouter(db));
 
+const generalRouter = require("./routes/general");
 app.use("/api", generalRouter(db));
 
+const messagesRouter = require("./routes/messages");
+app.use("/api/requests", messagesRouter(db));
 
 module.exports = app;
