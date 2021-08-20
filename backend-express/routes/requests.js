@@ -86,15 +86,14 @@ module.exports = (db) => {
   // DELETE a request
   router.delete("/:id/requests/:request_id", (req, res) => {
     console.log("IN DELETE REQUEST POST");
-    if (req.session && req.session.userId === parseInt(req.params.id)) {
-      requestsdbHelper
-        .deleteRequest(db, req.params.id)
-        .then((result) => {
-          //console.log("THIS IS RESULT IN DELETE REQ", result);
-          res.send();
-        })
-        .catch((err) => console.log(err));
-    }
+    requestsdbHelper
+    .deleteRequest(db, req.params.id)
+    .then((result) => {
+      //console.log("THIS IS RESULT IN DELETE REQ", result);
+      res.send();
+    })
+    .catch((err) => console.log(err));
+
   });
 
   // Assign a request to a service provider
