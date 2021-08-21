@@ -50,7 +50,7 @@ export default function useOfferListData() {
   console.log("assign offer was called")
     axios
       .post(
-        `http://localhost:3001/api/clients/${userId}/requests/${requestId}/offers/assign`,
+        `/api/clients/${userId}/requests/${requestId}/offers/assign`,
         { provider_id: providerId, price: price }
       )
       .then(() =>
