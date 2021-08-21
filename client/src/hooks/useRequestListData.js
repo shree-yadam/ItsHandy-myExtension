@@ -41,8 +41,8 @@ export default function useRequstListData() {
   // Gets offers and requests from db
   useEffect(() => {
     Promise.all([
-      axios.get(`http://localhost:3001/api/clients/${userId}/requests`),
-      axios.get(`http://localhost:3001/api/clients/${userId}/requests/offers`)
+      axios.get(`/api/clients/${userId}/requests`),
+      axios.get(`/api/clients/${userId}/requests/offers`)
     ])
       .then((all) => {
         setRequestListState((prev) => {
