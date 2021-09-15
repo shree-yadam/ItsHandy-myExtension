@@ -9,7 +9,7 @@ const { request } = require("express");
   // old query "select * from offers join requests on offers.request_id = requests.id where requests.client_id=$1"
   const query = `SELECT * FROM messages
   WHERE request_id = $1
-  ORDER BY time_sent DESC;`;
+  ORDER BY time_sent ASC;`;
   const queryParams = [request_id];
   return db.query(query, queryParams).then((result) => {
     console.log(result.rows);
