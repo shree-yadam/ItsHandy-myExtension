@@ -2,6 +2,7 @@ import axios from "axios";
 import RequestItemInfo from "./RequestItemInfo";
 import Button from 'react-bootstrap/Button';
 import './AssignedJobList.scss';
+import { useHistory } from "react-router-dom";
 
 export default function AssignedJobListItem({
   currentUser,
@@ -12,6 +13,8 @@ export default function AssignedJobListItem({
 }) {
 
   console.log(job);
+  // Browser History
+  const history = useHistory();
 
   function handleMarkCompleted(){
    console.log("Marking Completed");
@@ -25,6 +28,10 @@ export default function AssignedJobListItem({
 
   }
 
+  function handleMessage(){
+    history.push(`/messages/${id}/to/${job.client_id}`);
+  }
+
   return (
     <div className= "assigned-jobs" id="assigned-jobs-hov">
       <RequestItemInfo
@@ -35,6 +42,7 @@ export default function AssignedJobListItem({
         street_address={job.street_address}
         city={job.city}
       />
+      <Button onClick={handleMessage}>Messages</Button>
       {/* <Button onClick={handleMarkCompleted}>Mark Completed</Button> */}
     </div>
   )

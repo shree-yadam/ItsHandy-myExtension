@@ -1,13 +1,11 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import axios from "axios";
 import { useParams } from "react-router-dom";
 
-import useRequestListData from "./useRequestListData"
 /**
  * Handles requests data
  */
 export default function useOfferListData() {
-  const { requestListState, setRequestListState } = useRequestListData();
 
   const { userId, requestId } = useParams();
   // Id of user who made the requests

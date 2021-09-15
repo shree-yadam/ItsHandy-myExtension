@@ -23,10 +23,8 @@ module.exports = (db) => {
       });
   });
 
-  router.get("/:request_id/from/:from_id/to/:to_id/messages", (req, res) => {
-    const from_id = parseInt(req.params.from_id);
-    const to_id = parseInt(req.params.to_id);
-    console.log("Get Messages: ");
+  router.get("/:request_id/messages", (req, res) => {
+
     messagesDbHelper
       .getAllMessagesForRequest(db, req.params.request_id)
       .then((result) => {

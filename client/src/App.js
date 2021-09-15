@@ -116,12 +116,8 @@ function App() {
               <AssignedJobList currentUser={currentUser} categories={categories}/>
             </Route>
 
-            <Route path="/messages"  exact>
-              <Conversation currentUser={{id: 1,
-                first_name: "joe",
-                last_name: "smith",
-                email: "joe@smith.com",
-                is_provider: false}} requestId={1} toId={2} />
+            <Route path="/messages/:requestId/to/:toId"  exact>
+              <Conversation currentUser={currentUser} />
             </Route>
 
             <Route path="*">

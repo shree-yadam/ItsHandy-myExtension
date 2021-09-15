@@ -2,32 +2,19 @@ import { Form } from "react-bootstrap";
 import Button from "react-bootstrap/Button";
 import "./Conversation.scss";
 import { useState, useEffect } from "react";
+import { useParams } from "react-router-dom";
 import axios from "axios";
 
-export default function Conversation({ currentUser, requestId, toId }) {
+export default function Conversation({ currentUser }) {
   const [currentMessage, setCurrentMessage] = useState("");
   const [messageList, setMessageList] = useState([]);
-  // const [currentConversation, setCurrentConversation] = useState({});
-
+  const { requestId, toId } = useParams();
   //"/messages/requests/:requestId/users/:userId/with/:toId"
   useEffect(() => {
-    // setCurrentConversation({requestId, userId: currentUser.id, toId})
-    console.log('requestId :>> ', requestId);
-    console.log('userId :>> ', currentUser.id);
-    console.log('toId :>> ', toId);
-    axios.get(`/api/requests/${requestId}/from/${currentUser.id}/to/${toId}/messages`)
+    axios.get(`/api/requests/${requestId}/messages`)
       .then(res => setMessageList(res.data))
       .catch(err => console.log(err));
   },[]);
-
-  // function getMessageList(currentConversation){
-  //   console.log("Getting Current Messages ");
-  //   if(currentConversation) {
-
-  //   }
-
-  // };
-  console.log(messageList);
 
   function handlemessageSubmit() {
     console.log(currentMessage);
@@ -41,7 +28,8 @@ export default function Conversation({ currentUser, requestId, toId }) {
         setMessageList((prev) => {
           let newList = [...prev];
           const messageObj = {};
-          messageObj.id = prev[prev.length - 1].id + 1;
+          //TBD: Better way to handle random id
+          messageObj.id = Math.floor((Math.random() * 1000) + 1);
           messageObj.request_id = requestId;
           messageObj.from_id = currentUser.id;
           messageObj.to_id = toId;

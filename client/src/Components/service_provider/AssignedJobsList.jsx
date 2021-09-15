@@ -43,6 +43,7 @@ export default function AssignedJobList({currentUser, categories}){
       {assignedJobs && assignedJobs.length === 0  && <h3>No Entries.</h3>}
       {assignedJobs && assignedJobs.map((assignedJob) => <AssignedJobListItem
       key={assignedJob.id}
+      id={assignedJob.id}
       currentUser={currentUser}
       job={assignedJob}
       category={categories.find((category)=> category.id === assignedJob.category_id).name}
