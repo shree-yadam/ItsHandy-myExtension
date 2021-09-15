@@ -16,7 +16,7 @@ export default function Conversation({ currentUser, requestId, toId }) {
     console.log('userId :>> ', currentUser.id);
     console.log('toId :>> ', toId);
     axios.get(`/api/requests/${requestId}/from/${currentUser.id}/to/${toId}/messages`)
-      .then(res => console.log(res.data))
+      .then(res => setMessageList(res.data))
       .catch(err => console.log(err));
   },[]);
 
@@ -27,6 +27,7 @@ export default function Conversation({ currentUser, requestId, toId }) {
   //   }
 
   // };
+  console.log(messageList);
 
   function handlemessageSubmit() {
     console.log(currentMessage);
@@ -39,8 +40,14 @@ export default function Conversation({ currentUser, requestId, toId }) {
       .then((res) => {
         setMessageList((prev) => {
           let newList = [...prev];
-          newList.push(currentMessage);
-          console.log(newList);
+          const messageObj = {};
+          messageObj.id = prev[prev.length - 1].id + 1;
+          messageObj.request_id = requestId;
+          messageObj.from_id = currentUser.id;
+          messageObj.to_id = toId;
+          messageObj.time_sent = time_sent;
+          messageObj.message = currentMessage;
+          newList.push(messageObj);
           return newList;
         });
         setCurrentMessage("");
@@ -53,7 +60,7 @@ export default function Conversation({ currentUser, requestId, toId }) {
       <div>
         OLD Messages
         {messageList &&
-          messageList.map((message, index) => <p key={index}>{message}</p>)}
+          messageList.map(message => message.from_id === currentUser.id ? <p style={{color: "green"}} key={message.id}>{message.message}</p> : <p style={{color: "red"}} key={message.id}>{message.message}</p>)}
       </div>
 
       <Form.Group
