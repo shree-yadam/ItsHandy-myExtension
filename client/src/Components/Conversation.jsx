@@ -10,15 +10,15 @@ export default function Conversation({ currentUser, requestId, toId }) {
   // const [currentConversation, setCurrentConversation] = useState({});
 
   //"/messages/requests/:requestId/users/:userId/with/:toId"
-  // useEffect(() => {
-  //   // setCurrentConversation({requestId, userId: currentUser.id, toId})
-  //   console.log('requestId :>> ', requestId);
-  //   console.log('userId :>> ', currentUser.id);
-  //   console.log('toId :>> ', toId);
-  //   axios.get(`/api/requests/${requestId}/from/${currentUser.id}/to/${toId}/messages`)
-  //     .then(res => console.log(res.data))
-  //     .catch(err => console.log(err));
-  // },[]);
+  useEffect(() => {
+    // setCurrentConversation({requestId, userId: currentUser.id, toId})
+    console.log('requestId :>> ', requestId);
+    console.log('userId :>> ', currentUser.id);
+    console.log('toId :>> ', toId);
+    axios.get(`/api/requests/${requestId}/from/${currentUser.id}/to/${toId}/messages`)
+      .then(res => console.log(res.data))
+      .catch(err => console.log(err));
+  },[]);
 
   // function getMessageList(currentConversation){
   //   console.log("Getting Current Messages ");
