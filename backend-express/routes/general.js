@@ -7,7 +7,6 @@ module.exports = (db) => {
     categoriesDbHelper
       .getAllCategories(db)
       .then((result) => {
-        console.log("TESTING");
         res.json(result);
       })
       .catch((err) => {

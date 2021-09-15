@@ -18,6 +18,7 @@ import NoMatch from "./Components/NoMatch";
 import OfferList from "./Components/user/OfferList";
 import History from "./Components/service_provider/History";
 import CompletedRequestList from "./Components/user/CompletedRequestList";
+import Conversation from "./Components/Conversation";
 
 function App() {
   const [currentUser, setCurrentUser] = useState(null);
@@ -26,7 +27,6 @@ function App() {
   useEffect(() => {
     axios.get('/api/categories')
     .then((res) => {
-      console.log(res.data);
       setCategories(res.data);
       setCategories(prev => {
         const oldState = [...prev];
@@ -114,6 +114,14 @@ function App() {
 
             <Route path="/assigned_jobs">
               <AssignedJobList currentUser={currentUser} categories={categories}/>
+            </Route>
+
+            <Route path="/messages"  exact>
+              <Conversation currentUser={{id: 1,
+                first_name: "joe",
+                last_name: "smith",
+                email: "joe@smith.com",
+                is_provider: false}} requestId={1} toId={2} />
             </Route>
 
             <Route path="*">
