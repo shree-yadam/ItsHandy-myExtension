@@ -50,6 +50,12 @@ export default function Conversation({ currentUser, requestId, toId }) {
 
   return (
     <div className="conversation-container">
+      <div>
+        OLD Messages
+        {messageList &&
+          messageList.map((message, index) => <p key={index}>{message}</p>)}
+      </div>
+
       <Form.Group
         className="mb-3 conversation-input"
         controlId="conversationForm.ControlTextarea1"
@@ -72,11 +78,7 @@ export default function Conversation({ currentUser, requestId, toId }) {
         Submit
       </Button>
 
-      <div>
-        OLD Messages
-        {messageList &&
-          messageList.map((message, index) => <p key={index}>{message}</p>)}
-      </div>
+
     </div>
   );
 }
