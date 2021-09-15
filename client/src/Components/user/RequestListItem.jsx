@@ -126,57 +126,61 @@ export default function RequestListItem(props) {
       .catch((error) => console.log(error));
   };
 
-  const sendMessage = (event) => {
-    event.preventDefault();
-    console.log("SENT MESSAGE");
+  // const sendMessage = (event) => {
+  //   event.preventDefault();
+  //   console.log("SENT MESSAGE");
 
-    // TBD
-  };
+  //   // TBD
+  // };
 
+  const handleMessage = (event) => {
+    console.log("handleMessage");
+    history.push(`/messages/${props.OffersRequests.requestItem.id}/to/${props.OffersRequests.requestItem.provider_id}`);
+  }
 
   //console.log(props.OffersRequests.requestOffers.requestItem && !props.OffersRequests.requestOffers.requestItem.provider_id)
   //console.log("Line 60", props.OffersRequests.requestOffers, !props.OffersRequests.requestItem.provider_id, props.OffersRequests.requestOffers.length)
   return (
 
 
-    
+
       <div className="listitem-container">
         <div className="info-items">
         <h2>
                 {props.OffersRequests.requestItem.title}
               </h2>
-              
+
               <p>
                 {/* <p>Description: {props.OffersRequests.requestItem.description}</p> */}
                 {props.OffersRequests.requestItem.description}
               </p>
-              
+
           <div className="info-text">
-          
+
             <div className="text-info-header">
               <p>
                 {/* <p>Street Address: {props.OffersRequests.requestItem.street_address}</p> */}
                 <strong>Address: </strong>
                 {props.OffersRequests.requestItem.street_address}
-                
+
               </p>
-              
+
               <p>
                 <strong>City:</strong> {props.OffersRequests.requestItem.city}
-              </p> 
+              </p>
               <p>
                 {/* <p>Category: {props.OffersRequests.requestItem.category_name}</p> */}
                 <strong>Category: </strong>
                 {props.OffersRequests.requestItem.category_name}
               </p>
-             
-              
+
+
               <p>
                 <strong>Date Needed: </strong>
                 {props.OffersRequests.requestItem.preferred_date &&
                   props.OffersRequests.requestItem.preferred_date.slice(0, 10)}
               </p>
-              
+
 
             </div>
 
@@ -193,7 +197,7 @@ export default function RequestListItem(props) {
               {props.OffersRequests.requestItem.service_provider_first_name &&
                 "Service Provider assigned: " +
                 props.OffersRequests.requestItem.service_provider_first_name +
-                " " + 
+                " " +
                 props.OffersRequests.requestItem.service_provider_last_name}
               <br />
               <br />
@@ -209,6 +213,13 @@ export default function RequestListItem(props) {
             onClick={deleteRequest}
           >
             Delete
+          </Button>
+
+          <Button
+            className="request-service-btn"
+            onClick={handleMessage}
+          >
+            Message service provider
           </Button>
 
           {/* Renders Review and Complete button to finish a job and mark it completed if job was already assigned */}
